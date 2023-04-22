@@ -19,7 +19,7 @@ public class VendingMachine implements Serializable {
         }
     }
     public static void removeProduct(int id) {
-        if (id > 0 && id < extent.size()) {
+        if (id > 0 && id < extent.size() + 1) {
             extent.remove(id - 1);
             current_amount--;
             System.out.println("Product removed succesfully");
@@ -30,12 +30,20 @@ public class VendingMachine implements Serializable {
     public static void showProducts() {
         if (extent.size() == 0) {
             System.out.println("None");
-            return;
         }
         for(int i = 0; i < extent.size(); i++) {
             System.out.println(i + 1 + ". " + extent.get(i));
         }
     }
+    public static void showProductsSpecified() {
+        if (extent.size() == 0) {
+            System.out.println("None");
+        }
+        for(int i = 0; i < extent.size(); i++) {
+            System.out.println(i + 1 + ". " + extent.get(i).showFullInfo());
+        }
+    }
+
 
     /**
      * Metoda Klasowa
@@ -45,7 +53,7 @@ public class VendingMachine implements Serializable {
             var in = new ObjectInputStream(new FileInputStream(extentFile));
             VendingMachine.readExtent(in);
             in.close();
-            System.out.println("Vending Machine state initialized");
+            System.out.println("Vending Machine state loaded");
         } catch (IOException | ClassNotFoundException e) { e.printStackTrace(); }
     }
     public static void save(String extentFile) {

@@ -26,7 +26,7 @@ public class Label implements Serializable {
     /**
      * Przeciążenie
      */
-    public Label(String[] allergens, double weight, double kcal,double alcoholPercent) {
+    public Label(String[] allergens, double weight, double kcal, double alcoholPercent) {
         this.allergens = allergens;
         this.weight = weight;
         this.kcal = kcal;
@@ -37,17 +37,14 @@ public class Label implements Serializable {
      * Atrybut pochodny
      */
     public String getAllergens() {
-        if (allergens.length == 0) {
-            return "none";
-        }
         StringBuilder result = new StringBuilder("");
         for (String allergen : allergens) {
-            result.append(allergen + ",");
+            result.append(allergen + ";");
         }
         return result.toString();
     }
     public String getAlcoholIfExists() {
-        return alcoholPercent == null ? "0%" : alcoholPercent.toString() + "%";
+        return alcoholPercent == null ? "not applicable" : alcoholPercent.toString() + "%";
     }
     public double getWeight() {
         return weight;
