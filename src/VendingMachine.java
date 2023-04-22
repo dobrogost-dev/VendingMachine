@@ -16,6 +16,8 @@ public class VendingMachine implements Serializable {
         if (current_amount < MAX_CAPACITY) {
             extent.add(product);
             current_amount++;
+        } else {
+            System.out.println("Capacity exceded, remove other products");
         }
     }
     public static void removeProduct(int id) {
@@ -43,15 +45,14 @@ public class VendingMachine implements Serializable {
             System.out.println(i + 1 + ". " + extent.get(i).showFullInfo());
         }
     }
-
-
     /**
      * Metoda Klasowa
      */
     public static void initialize(String extentFile) {
         try {
             var in = new ObjectInputStream(new FileInputStream(extentFile));
-            VendingMachine.readExtent(in);
+            extent = (ArrayList<Product>) in.readObject();
+            current_amount = extent.size();
             in.close();
             System.out.println("Vending Machine state loaded");
         } catch (IOException | ClassNotFoundException e) { e.printStackTrace(); }
@@ -59,17 +60,9 @@ public class VendingMachine implements Serializable {
     public static void save(String extentFile) {
         try {
             var out = new ObjectOutputStream(new FileOutputStream(extentFile));
-            VendingMachine.writeExtent(out);
+            out.writeObject(extent);
             out.close();
             System.out.println("Vending Machine state saved");
         } catch (IOException e) { e.printStackTrace(); }
-    }
-    public static void writeExtent(ObjectOutputStream stream) throws IOException {
-        stream.writeObject(extent);
-    }
-    public static void readExtent(ObjectInputStream stream) throws IOException,
-            ClassNotFoundException {
-        extent = (ArrayList<Product>) stream.readObject();
-        current_amount = extent.size();
     }
 }
