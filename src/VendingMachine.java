@@ -64,9 +64,6 @@ public class VendingMachine implements Serializable {
             System.out.println("Vending Machine state saved");
         } catch (IOException e) { e.printStackTrace(); }
     }
-    public static void changeMaxCapacity(int capacity) {
-        MAX_CAPACITY = capacity;
-    }
     public static void writeExtent(ObjectOutputStream stream) throws IOException {
         stream.writeObject(extent);
     }
