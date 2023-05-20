@@ -42,4 +42,11 @@ public class VendingMachine implements Serializable {
             product.showFullInfo();
         }
     }
+    public void addVMM(VendingMachine_Maintenace VMM){
+        this.VMM.add(VMM);
+    }
+    @Override
+    public String toString() {
+        return serial_number;
+    }
 }

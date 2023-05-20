@@ -1,11 +1,25 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class VendingMachine_Maintenace {
-    private List<VendingMachine> vendingMachines;
-    private List<Maintenace_Technician> maintenaceTechnicians;
+    private Map<VendingMachine, Set<Maintenace_Technician>> VMM;
     public VendingMachine_Maintenace() {
-        vendingMachines = new ArrayList<>();
-        maintenaceTechnicians = new ArrayList<>();
+        VMM = new HashMap<>();
+    }
+    public void assign(Maintenace_Technician mTechnician, VendingMachine vendingMachine) throws Exception {
+        Set<Maintenace_Technician> set = VMM.get(vendingMachine);
+        if (set == null) {
+            set = new HashSet<>();
+            VMM.put(vendingMachine, set);
+        }
+        set.add(mTechnician);
+    }
+    public void showInfo() {
+        for (Map.Entry<VendingMachine, Set<Maintenace_Technician>> entry : VMM.entrySet()) {
+            System.out.print("Vending Machine: " + entry.getKey());
+            System.out.print(" Technicians: " + entry.getValue() + "\n");
+        }
     }
 }

@@ -7,9 +7,18 @@ public class Location {
     /*
     Asocjacja kwalifikowana
      */
-    private final Map<String, VendingMachine> vendingMachines = new HashMap<>();
+    //Kwalifikatorem jest String serial_number
+    private final Map<String, VendingMachine> vendingMachines;
+
+    public Location(int id, String address) {
+        this.id = id;
+        this.address = address;
+        vendingMachines = new HashMap<>();
+    }
+
     public void addVendingMachine(VendingMachine vendingMachine) {
         if (!vendingMachines.containsKey(vendingMachine.serial_number)) {
+            //Asocjacja w obie strony
             vendingMachines.put(vendingMachine.serial_number, vendingMachine);
             vendingMachine.addLocation(this);
         }
