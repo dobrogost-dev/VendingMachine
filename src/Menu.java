@@ -2,7 +2,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
+    private VendingMachine vendingMachine;
     public Menu() {
+        vendingMachine = new VendingMachine();
     }
     public void process(String extentFile) {
         Scanner scanner = new Scanner(System.in);
@@ -16,17 +18,17 @@ public class Menu {
                 break;
             case "3":
                 System.out.println("Products in the vending machine:");
-                VendingMachine.showProducts();
+                vendingMachine.showProducts();
                 break;
             case "4":
                 System.out.println("Products in the vending machine with specified label:");
-                VendingMachine.showProductsSpecified();
+                vendingMachine.showProductsSpecified();
                 break;
             case "5":
-                VendingMachine.save(extentFile);
+                vendingMachine.save(extentFile);
                 break;
             case "6":
-                VendingMachine.initialize(extentFile);
+                vendingMachine.initialize(extentFile);
                 break;
             case "7": System.exit(0);
                 break;
@@ -46,14 +48,14 @@ public class Menu {
                 *************************
                 """);
     }
-    public static void remove() {
+    public void remove() {
             System.out.println("Which product do you want to remove?");
-            VendingMachine.showProducts();
+            vendingMachine.showProducts();
             Scanner scanner = new Scanner(System.in);
             int input = scanner.nextInt();
-            VendingMachine.removeProduct(input);
+            vendingMachine.removeProduct(input);
         }
-        public static void add() {
+        public void add() {
             try {
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("What is name of the product?");
@@ -72,7 +74,7 @@ public class Menu {
                 Label label = alcoholPercent == 0.0 ? new Label(allergens, weight, kcal)
                         : new Label(allergens, weight, kcal, alcoholPercent);
                 Product product = new Product(name, price, label);
-                VendingMachine.addProduct(product);
+                vendingMachine.addProduct(product);
                 System.out.println("Product added successfully");
             } catch (InputMismatchException ime) {
                 System.out.println("Wrong input");

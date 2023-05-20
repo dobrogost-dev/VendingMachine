@@ -1,29 +1,20 @@
 import java.io.Serializable;
 
 public class Label implements Serializable {
-    /**
-     * Atrybut powtarzalny
-     */
     private String[] allergens;
-
-    /**
-     * Atrybuty proste
-     */
     private double weight;
     private double kcal;
-    /**
-     * Atrybut opcjonalny
-     */
     private Double alcoholPercent;
+    /*
+    Kompozycja
+     */
+    private Product product;
     public Label(String[] allergens, double weight, double kcal) {
         this.allergens = allergens;
         this.weight = weight;
         this.kcal = kcal;
     }
 
-    /**
-     * Przeciążenie
-     */
     public Label(String[] allergens, double weight, double kcal, double alcoholPercent) {
         this.allergens = allergens;
         this.weight = weight;
@@ -31,9 +22,6 @@ public class Label implements Serializable {
         this.alcoholPercent = alcoholPercent;
     }
 
-    /**
-     * Atrybut pochodny
-     */
     public String getAllergens() {
         StringBuilder result = new StringBuilder("");
         for (String allergen : allergens) {
