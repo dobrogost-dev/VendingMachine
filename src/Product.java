@@ -11,21 +11,24 @@ public class Product implements Serializable {
     Asocjacja zwykła
      */
     private VendingMachine vendingMachine;
-    public Product(String name, double price, Label label) {
+    public Product(String name, double price) {
         this.price = price;
         this.name = name;
-        this.label = label;
         this.vendingMachine = null;
     }
     public void setVendingMachine(VendingMachine vendingMachine) {
         this.vendingMachine = vendingMachine;
     }
-    public String showFullInfo() {
-        return this +  " Weight: " + label.getWeight() + "g Kcal: " + label.getKcal()
-                + " Alcohol: " + label.getAlcoholIfExists() + " Allergens: " +  label.getAllergens();
+    public void setLabel(Label label) {
+        this.label = label;
+        label.addProduct(this);
     }
-    @Override
-    public String toString() {
-        return name + ": " + price + "zł.";
+    public void showFullInfo() {
+        String info = "Name: " + name + " Price: " + price + "zł";
+        if (label == null) {
+        } else {
+            info += label.getInfo();
+        }
+        System.out.println(info);
     }
 }
