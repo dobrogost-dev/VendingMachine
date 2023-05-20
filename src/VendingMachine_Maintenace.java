@@ -15,6 +15,8 @@ public class VendingMachine_Maintenace {
             VMM.put(vendingMachine, set);
         }
         set.add(mTechnician);
+        mTechnician.addVMM(this);
+        vendingMachine.addVMM(this);
     }
     public void showInfo() {
         for (Map.Entry<VendingMachine, Set<Maintenace_Technician>> entry : VMM.entrySet()) {
